@@ -87,17 +87,40 @@ $(document).ready(() => {
     $(".allData").append("<div class=data" + ID + "></div>");
     //Set the bar to be displayed inline-block as the bars must be side by side
     $(".data" + ID).css("display", "inline-block");
+    
     //for each datapoint in the bar, draw the bar (data for a single bar must be sorted from lowest-highest)
     for (var i = 1; i < data[ID].length; i++) {
       $(".data" + ID).prepend("<div class=dataBar" + ID + i + "><div class=dataPoint" + i + ">" + data[ID][i] + "</div></div>");
-      $(".dataBar" + ID + i).css("border-top", "1px solid " + options[5]);
-      $(".dataBar" + ID + i).css("border-left", "1px solid " + options[5]);
-      $(".dataBar" + ID + i).css("border-right", "1px solid " + options[5]);
-      $(".dataBar" + ID + i).css("width", (options[11] / (data.length + 1))); //Determine the width of each bar based on the width of the chart area
-      $(".dataBar" + ID + i).css("position", "relative");
-      $(".dataPoint" + i).css("position", "absolute");
-      $(".dataPoint" + i).css("left", "50%");
-      $(".dataPoint" + i).css("color", options[6]);
+      if(i % 2 !== 0){ //Coloring the BOTTOM BAR
+          $(".dataBar" + ID + i).css({
+          "border-top" : "1px solid " + options[5],
+          "border-left" : "1px solid " + options[5],
+          "border-right" : "1px solid " + options[5],
+          "width": (options[11] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
+          "position" : "relative",
+          "background-color" : "#FFF000" // Change later in the options
+        });
+        $(".dataPoint" + i).css({
+          "position" : "absolute",
+          "left" : "50%",
+          "color" : options[6]
+        });
+      }else{ //Coloring the TOP BAR
+        $(".dataBar" + ID + i).css({
+          "border-top" : "1px solid " + options[5],
+          "border-left" : "1px solid " + options[5],
+          "border-right" : "1px solid " + options[5],
+          "width": (options[11] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
+          "position" : "relative",
+          "background-color" : "#663399" // Change later in the options
+        });
+        $(".dataPoint" + i).css({
+          "position" : "absolute",
+          "left" : "50%",
+          "color" : options[6]
+        });
+      }
+
       //Set the dataPoint to display at either the top, middle or bottom of the bar
       if (options[3] === "top") {
         $(".dataPoint" + i).css("top", "5%");
@@ -154,5 +177,5 @@ $(document).ready(() => {
   drawXLabel(options, element);
   drawMainTitle(data, options, element);
   var maxAxisVal = drawData(data, options); //Draws the bars and returns the max value of the axis
-  
+
 });
