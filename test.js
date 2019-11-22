@@ -10,16 +10,14 @@ $(document).ready(() =>{
 
   options = ["DefaultMainTitle", "#1e90ff", "30px", "DefaultYTitle", "#663399", "25px", "DefaultXTitle", "#006400", "25px",
   "#ff9a00", "20px", "#b904b8", "20px", 
-  "10", "none", "#00FA9A", "#FFF000", "#FF0000", "20px", "middle", "20px", 
+  "10", "none", "#00FA9A", "#FFF000", "#FF0000", "12px", "middle", "20px", 
   "200" , "200"], 
 
-  data = [["apples", 5, 20],["oranges", 9, 18],["banana", 7],["avacado", 27, 30],["misc.", 10]],
+  data = [["Item1", 20, 30],["Item2", 15],["Item3", 36],["Item4", 25],["Item5", 45]],
   element = ".barGraph";
   
-  //console.log(options)
-
   //The Functions
-  function drawXYBox(height, width, element) {
+  function drawXYBox(element) {
       $(element).prepend("<div class=xyData></div>");
       //$(".xyData").css("border-left", "1px solid black");
       $(".xyData").css({
@@ -63,7 +61,7 @@ $(document).ready(() =>{
       });
   }
 
-  function drawMainTitle(data, options, element) {
+  function drawMainTitle(options, element) {
       $(element).prepend("<div class=title contenteditable=true>" + options[0] + "</div>");
       $(".title").css({
         "width" : "100%",
@@ -83,40 +81,50 @@ $(document).ready(() =>{
       "display" : "inline-block",
       "background-color" : options[14]
     });
+
+    function makeBottomBar(ID, i, data, options){
+      $(".dataBar" + ID + i).css({
+        "border-top" : "1px solid black",
+        "border-left" : "1px solid black",
+        "border-right" : "1px solid black",
+        //Uncomment the line underneath to have equal width bars
+        //"width": (options[22] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
+        "width" : (data[ID][i]), //Width based on the numeric value of bar
+        "position" : "relative",
+        "background-color" : options[15] // Change later in the options
+      });
+      $(".dataPoint" + i).css({
+        "position" : "absolute",
+        "left" : "50%",
+        "color" : options[17],
+        "font-size" : options[18]
+      });
+    }
+
+    function makeTopBar(ID, i, data, options){
+      $(".dataBar" + ID + i).css({
+        "border" : "1px solid black",
+        //Uncomment the line underneath to have equal width bars
+        //"width": (options[22] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
+        "width" : (data[ID][i]), //Width based on the numeric value of bar
+        "position" : "relative",
+        "background-color" : options[16] // Change later in the options
+      });
+      $(".dataPoint" + i).css({
+        "position" : "absolute",
+        "left" : "50%",
+        "color" : options[17],
+        "font-size" : options[18]
+      });
+    }
     
     //for each datapoint in the bar, draw the bar (data for a single bar must be sorted from lowest-highest)
     for (var i = 1; i < data[ID].length; i++) {
       $(".data" + ID).prepend("<div class=dataBar" + ID + i + "><div class=dataPoint" + i + ">" + data[ID][i] + "</div></div>");
-      if(i % 2 !== 0){ //Coloring the BOTTOM BAR
-          $(".dataBar" + ID + i).css({
-          "border-top" : "1px solid black",
-          "border-left" : "1px solid black",
-          "border-right" : "1px solid black",
-          "width": (options[22] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
-          "position" : "relative",
-          "background-color" : options[15] // Change later in the options
-        });
-        $(".dataPoint" + i).css({
-          "position" : "absolute",
-          "left" : "50%",
-          "color" : options[17],
-          "font-size" : options[18]
-        });
-      }else{ //Coloring the TOP BAR
-        $(".dataBar" + ID + i).css({
-          "border-top" : "1px solid black",
-          "border-left" : "1px solid black",
-          "border-right" : "1px solid black",
-          "width": (options[22] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
-          "position" : "relative",
-          "background-color" : options[16] // Change later in the options
-        });
-        $(".dataPoint" + i).css({
-          "position" : "absolute",
-          "left" : "50%",
-          "color" : options[17],
-          "font-size" : options[18]
-        });
+      if(i % 2 !== 0){ // BOTTOM BAR MAKING FUNCTION RUNNING
+        makeBottomBar(ID, i, data, options)
+      }else{ // TOP BAR MAKING FUNCTION RUNNING
+        makeTopBar(ID, i, data, options)
       }
 
       //Set the dataPoint to display at either the top, middle or bottom of the bar
@@ -202,19 +210,20 @@ $(document).ready(() =>{
         $(".xLabel").append("<div class=tick" + i + ">" + data[i][0] + "</div>");
         $(".tick" + i).css({
           "display" : "inline-block",
-          "text-align" : "center",
+          //"text-align" : "center",
           //Translate the x-axis labels so they are written vertically
           "writing-mode" : "tb-rl",
           "flex-grow" : "1",
           "top" : "50%",
+          "padding-right" : "10px",
           "position" : "relative",
-          "transform" : "translateX(-40%)"
+          "transform" : "translateX(-40%)",
         });
       }
 
       //set the color of the labels and add a margin for aesthetic
       $(".xLabel").css({
-        "margin-top" : "5px",
+        "margin" : "auto",
         "color" : options[11],
         "font-size" : options[12]
       });
@@ -225,11 +234,13 @@ $(document).ready(() =>{
   }
 
   
-  drawXYBox(200, 200, element);
+  drawXYBox(element);
   drawYLabel(element, options);
   drawXLabel(options, element)
-  drawMainTitle(data, options, element)
+  drawMainTitle(options, element)
   var maxAxisVal = drawData(data, options);
   drawAxisMarks(data, options, maxAxisVal)
+
+  
 
 })
