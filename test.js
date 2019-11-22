@@ -13,12 +13,15 @@ $(document).ready(() =>{
   "200" , "200"], 
 
   data = [["Item1", 20, 30],["Item2", 28],["Item3", 36],["Item4", 25],["Item5", 45]],
-  element = ".barGraph";
+  
+  //The DOM Element where the entire bargrpah will be rendered
+  element = ".root";
+
+  drawBarChart(data, options, element)
   
   //The Functions
   function drawXYBox(element) {
       $(element).prepend("<div class=xyData></div>");
-      //$(".xyData").css("border-left", "1px solid black");
       $(".xyData").css({
         "height" : "auto",
         "width" : "auto",
@@ -150,9 +153,9 @@ $(document).ready(() =>{
     $(".data" + ID).css("border-bottom", "1px solid black");
     //add the space between each bar
     $(".allData").append("<div class=barSpace></div>");
-}
+  }
 
-//Function to create the bars using the data given
+  //Function to create the bars using the data given
   function drawData(data, options) {
     $(".xyData").append("<div class=allData></div>");
     $(".allData").css("border-left", "1px solid black");
@@ -233,19 +236,18 @@ $(document).ready(() =>{
       });
   }
 
-  
-  drawXYBox(element);
-  drawYLabel(element, options);
-  var maxAxisVal = drawData(data, options);
-  drawAxisMarks(data, options, maxAxisVal)
-  var chartWidth = $(".xyData").width(); console.log(chartWidth)
-  drawXLabel(options, chartWidth, element)
-  drawMainTitle(options, chartWidth, element)
-  
-  //THE CLICK EVENTS
+  function drawBarChart(data, options, element){
+    drawXYBox(element);
+    drawYLabel(element, options);
+    var maxAxisVal = drawData(data, options);
+    drawAxisMarks(data, options, maxAxisVal);
+    var chartWidth = $(".xyData").width();
+    drawXLabel(options, chartWidth, element);
+    drawMainTitle(options, chartWidth, element);
+
+    //THE CLICK EVENTS
   // Main title, X-Title and Y-Title editable on CLICK
   $(".title, .xTitle, .yTitle").click((event) => {
-    
     if($(event.target).attr('class') === 'title'){
       var input = window.prompt("Enter name of chart", "");
       $(event.target).closest('div').text(input)
@@ -256,9 +258,7 @@ $(document).ready(() =>{
       var input = window.prompt("Enter value for y-axis", "");
       $(event.target).closest('div').text(input)
     }
-
   });
-
 
   //Changes color of individual xLabel colors ON CLICK
   $(".xLabel").click((event) => {
@@ -271,5 +271,6 @@ $(document).ready(() =>{
     var input = window.prompt("Enter a color", "");
     $(event.target).closest('div').css("color", input);
   });
+  }
 
 })
