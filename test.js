@@ -7,13 +7,12 @@ $(document).ready(() =>{
 // YAxisSegmentSize, Color-Bar, Color-BottomBar, Color-TopBar, Color-ValueOfBar,
 // Size-ValueOfBar, Middle-PositionOfValueOfBar, SpacingBetweenBars, Height and Width of chart]
 
-
   options = ["DefaultMainTitle", "#1e90ff", "30px", "DefaultYTitle", "#663399", "25px", "DefaultXTitle", "#006400", "25px",
   "#ff9a00", "20px", "#b904b8", "20px", 
   "10", "none", "#00FA9A", "#FFF000", "#FF0000", "12px", "middle", "20px", 
   "200" , "200"], 
 
-  data = [["Item1", 20, 30],["Item2", 15],["Item3", 36],["Item4", 25],["Item5", 45]],
+  data = [["Item1", 20, 30],["Item2", 28],["Item3", 36],["Item4", 25],["Item5", 45]],
   element = ".barGraph";
   
   //The Functions
@@ -48,23 +47,24 @@ $(document).ready(() =>{
       });
   }
 
-  function drawXLabel(options, element){
+  function drawXLabel(options, chartWidth, element){
       $(element).prepend("<div class=xTitle contenteditable=true>" + options[6] + "</div>");
       $(".xTitle").css({
-        //"text-align" : "center",
-        "padding-left" : "100px",
-        "width" : "100%",
+        "text-align" : "center",
+        "padding-left" : "60px",
+        "width" : chartWidth,
         "margin-top" : "10px",
         "margin-bottom" : "20px",
         "color" : options[7],
         "font-size" : options[8]
-      });
+      })
   }
 
-  function drawMainTitle(options, element) {
+  function drawMainTitle(options, chartWidth, element) {
       $(element).prepend("<div class=title contenteditable=true>" + options[0] + "</div>");
       $(".title").css({
-        "width" : "100%",
+        "width" : chartWidth,
+        "padding-left" : "60px",
         "text-align" : "center",
         "color": options[1],
         "font-size" : options[2],
@@ -236,11 +236,40 @@ $(document).ready(() =>{
   
   drawXYBox(element);
   drawYLabel(element, options);
-  drawXLabel(options, element)
-  drawMainTitle(options, element)
   var maxAxisVal = drawData(data, options);
   drawAxisMarks(data, options, maxAxisVal)
-
+  var chartWidth = $(".xyData").width(); console.log(chartWidth)
+  drawXLabel(options, chartWidth, element)
+  drawMainTitle(options, chartWidth, element)
   
+  //THE CLICK EVENTS
+  // Main title, X-Title and Y-Title editable on CLICK
+  $(".title, .xTitle, .yTitle").click((event) => {
+    
+    if($(event.target).attr('class') === 'title'){
+      var input = window.prompt("Enter name of chart", "");
+      $(event.target).closest('div').text(input)
+    }else if($(event.target).attr('class') === 'xTitle'){
+      var input = window.prompt("Enter name for x-axis", "");
+      $(event.target).closest('div').text(input)
+    }else if($(event.target).attr('class') === 'yTitle'){
+      var input = window.prompt("Enter value for y-axis", "");
+      $(event.target).closest('div').text(input)
+    }
+
+  });
+
+
+  //Changes color of individual xLabel colors ON CLICK
+  $(".xLabel").click((event) => {
+    var input = window.prompt("Enter a color", "");
+    $(event.target).closest('div').css("color", input);
+  });
+
+  //Changes color of individual YLabel colors ON CLICK
+  $(".yLabel").click((event) => {
+    var input = window.prompt("Enter a color", "");
+    $(event.target).closest('div').css("color", input);
+  });
 
 })
