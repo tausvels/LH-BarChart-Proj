@@ -1,21 +1,68 @@
 $(document).ready(() =>{
   //The parameters
 
-//   Format: 
-// [MainTitle, Color-MainTitle, Size-MainTItle, YTitle, Color-YTitle, Size-YTitle
-// XTitle, Color-XTutle, Size-XTitle, Color-Ylabel, Size-YLabel, Color-XLabel, Size-XLabel
-// YAxisSegmentSize, Color-Bar, Color-BottomBar, Color-TopBar, Color-ValueOfBar,
-// Size-ValueOfBar, Middle-PositionOfValueOfBar, SpacingBetweenBars, Height and Width of chart]
+// Format: options = [  
+//  MainTitle, 
+//  Color-MainTitle, 
+//  Size-MainTItle, 
+//  YTitle, 
+//  Color-YTitle, 
+//  Size-YTitle,
+//  XTitle, 
+//  Color-XTitle, 
+//  Size-XTitle, 
+//  Color-Ylabel, 
+//  Size-YLabel, 
+//  Color-XLabel, 
+//  Size-XLabel
+//  YAxisSegmentSize, 
+//  Color-Bar, 
+//  Color-BottomBar, 
+//  Color-TopBar, 
+//  Color-ValueOfBar,
+//  Size-ValueOfBar, 
+//  Middle-PositionOfValueOfBar, 
+//  SpacingBetweenBars, 
+//  Height of chart,
+//  Width of chart
+//  ]
 
-  options = ["DefaultMainTitle", "#1e90ff", "30px", "DefaultYTitle", "#663399", "25px", "DefaultXTitle", "#006400", "25px",
-  "#ff9a00", "20px", "#b904b8", "20px", 
-  "10", "none", "#00FA9A", "#FFF000", "#FF0000", "12px", "middle", "20px", 
-  "200" , "200"], 
-
-  data = [["Item1", 20, 30],["Item2", 28],["Item3", 36],["Item4", 25],["Item5", 45]],
-  
-  //The DOM Element where the entire bargrpah will be rendered
-  element = ".root";
+  (options = [
+    "DefaultMainTitle", // Main Title (Default)
+    "#1e90ff",          // Color-MainTitle
+    "30px",             // Size-MainTitle
+    "DefaultYTitle",    // Y-Title (Default)
+    "#663399",          // Y-Title (Color)
+    "25px",             // Y-Title (Font-size)
+    "DefaultXTitle",    // X-Title (Default)
+    "#006400",          // X-Title (Color)
+    "25px",             // X-Title (Font-size)
+    "#ff9a00",          // Y-Label (Color)
+    "20px",             // Y-Label (Size)
+    "#b904b8",          // X-Label (Color)
+    "20px",             // X-Label (Font-Size)
+    "5",               // Y-Axis Divisions or increment value
+    "none",             // Bar (Color)
+    "#00FA9A",          // Bottom Bar (Color)
+    "#FFF000",          // Top Bar (Color)
+    "#FF0000",          // Value of Bar (Color)
+    "12px",             // Value of Bar (Font-Size)
+    "middle",           // Value of Bar (Position)
+    "20px",             // Space Between Bars
+    "200",              // Height of entire Bar Chart (Dafault='auto')
+    "200",              // Width of entire Bar Chart (Dafault='auto')
+    "valDepend"         // Bar width dependent on the value of each bar (leave blank to have equal width)
+  ]),
+    //Format: data = [["Item1", Value1, Value2], ["Item2", Value1, Value2], ["Item3", Value1, Value2],]
+    (data = [
+      ["Item1", 20, 30],
+      ["Item2", 28, 12],
+      ["Item3", 36],
+      ["Item4", 25],
+      ["Item5", 30]
+    ]),
+    //The DOM Element where the entire bargrpah will be rendered
+    (element = ".root");
 
   function drawBarChart(data, options, element){
 
@@ -89,13 +136,24 @@ $(document).ready(() =>{
         $(".dataBar" + ID + i).css({
           "border-top" : "1px solid black",
           "border-left" : "1px solid black",
-          "border-right" : "1px solid black",
-          //Uncomment the line underneath to have equal width bars
-          //"width": (options[22] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
-          "width" : (data[ID][i]), //Width based on the numeric value of bar
+          "border-right" : "1px solid black"
+        })
+        if(options[23] === "valDepend"){
+          $(".dataBar" + ID + i).css({
+            "width" : (data[ID][i]), //Width based on the numeric value of bar
+          })
+        }else{
+          $(".dataBar" + ID + i).css({
+            //Determine the width of each bar based on the width of the chart area
+            "width": (options[22] / (data.length + 1)) 
+          })
+        }
+        $(".dataBar" + ID + i).css({          
           "position" : "relative",
           "background-color" : options[15] // Change later in the options
         });
+
+        // Getting the data points styled
         $(".dataPoint" + i).css({
           "position" : "absolute",
           "left" : "50%",
@@ -105,19 +163,27 @@ $(document).ready(() =>{
       }
 
       function makeTopBar(ID, i, data, options){
-        $(".dataBar" + ID + i).css({
-          "border" : "1px solid black",
-          //Uncomment the line underneath to have equal width bars
-          //"width": (options[22] / (data.length + 1)), //Determine the width of each bar based on the width of the chart area
-          "width" : (data[ID][i]), //Width based on the numeric value of bar
-          "position" : "relative",
-          "background-color" : options[16] // Change later in the options
+        if(options[23] === "valDepend"){
+          $(".dataBar" + ID + i).css({
+            "width" : (data[ID][i]), //Width based on the numeric value of bar
+          })
+        }else{
+          $(".dataBar" + ID + i).css({
+            //Determine the width of each bar based on the width of the chart area
+            "width": (options[22] / (data.length + 1)), 
+          })
+        }
+        $(".dataBar" + ID + i).css({  
+            "border" : "1px solid black",
+            "position" : "relative",
+            "background-color" : options[16] // Change later in the options
         });
+
         $(".dataPoint" + i).css({
-          "position" : "absolute",
-          "left" : "50%",
-          "color" : options[17],
-          "font-size" : options[18]
+            "position" : "absolute",
+            "left" : "50%",
+            "color" : options[17],
+            "font-size" : options[18]
         });
       }
       
@@ -145,7 +211,7 @@ $(document).ready(() =>{
         var heightVal = (data[ID][i] / maxVal) * options[21];
         //console.log(heightVal + " outside");
         for (var j = 1; j < i; j++) {
-          heightVal = (((data[ID][j] / maxVal) * options[21]) - heightVal) * (-1);
+          //heightVal = (((data[ID][j] / maxVal) * options[21]) - heightVal) * (-1);
           //console.log(heightVal);
         }
         $(".dataBar" + ID + i).css("height", heightVal);
@@ -161,16 +227,29 @@ $(document).ready(() =>{
       $(".allData").css("border-left", "1px solid black");
       
       //Find the max value contained in the data. This sets the container height.
-      var maxVal = data[0][1];
-      for (var i = 0; i < data.length; i++) {
-        for (var j = 1; j < data[i].length; j++) {
-          if (maxVal < data[i][j]) maxVal = data[i][j];
+      //TESTING
+      if(!isNaN(data[0][2])){
+        var maxVal = data[0][1] + data[0][2];
+      }else{
+        var maxVal = data[0][1];console.log(maxVal)
+      }
+
+      for(let i = 0; i<data.length; i++){
+        var arr = [], sum = 0;
+        for(let j=1; j<data[i].length; j++){
+          arr.push(data[i][j])
         }
+        if(arr.length > 1){
+          sum = arr.reduce((total, current)=>(total+current));
+        }else{
+          sum = arr[0];
+        }
+        if(maxVal < sum){maxVal = sum}
       }
 
       //Get the largest y-axis value, which will be the closest multiple of 5 to the max value rounded up.
       var maxValAxis = Math.ceil(maxVal / 5) * 5;
-      //calls the drawBars function for each bar that needs to be drawn in the data param
+      //calls the drawBars function for each bar that needs to be drawn
       for (var i = 0; i < data.length; i++) {
         drawBars(i, maxValAxis, options, data);
       }
@@ -191,12 +270,11 @@ $(document).ready(() =>{
       $(".xLabel").css("display", "flex");
       $(".xLabel").css("flex-wrap", "nowrap");
       
-      //Each y-axis will have 10 axis-marks
-      var yAxisSegments = parseInt(options[13]); // Can be changed using the options value
-      var increment = maxValAxis / yAxisSegments;
-
+      //Each y-axis will have 10 axis-marks 
+      var increment = parseInt(options[13]); // Can be changed using the options value
+      var yAxisSegments = Math.ceil(maxAxisVal / increment);
       //Every odd value of i, we draw an axis mark with a label (ie] -10), every even value we just draw an axis mark (ie] -).
-      for (var i = (yAxisSegments - 1); i >= -1; i--) {
+      for (var i = (yAxisSegments -1); i >= -1; i--) {console.log(maxValAxis)
         if (i % 2 != 0) { //i.e.- Odd value
           $(".yLabel").append("<div class=dashY" + i + ">" + maxValAxis + "-</div>");
           $(".dashY" + i).css("height", (options[21] / yAxisSegments));
@@ -207,6 +285,7 @@ $(document).ready(() =>{
         maxValAxis -= increment;
         $(".dashY" + i).css("text-align", "right");
       }
+      
 
       //for each bar, draw an x-axis label
       for (var i = 0; i < data.length; i++) {
@@ -224,7 +303,7 @@ $(document).ready(() =>{
         });
       }
 
-      //set the color of the labels and add a margin for aesthetic
+      //Color of the labels and add a margin
       $(".xLabel").css({
         "margin" : "auto",
         "color" : options[11],
@@ -277,5 +356,6 @@ $(document).ready(() =>{
 
 //RUNNING THE drawBarChartFunction
 drawBarChart(data, options, element)
+
 
 })
