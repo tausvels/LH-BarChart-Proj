@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/tausvels/LH-BarChart-Proj/issues"
   },
-  "homepage": "https://github.com/tausvels/LH-BarChart-Proj#readme"
+  "homepage": "https://github.com/tausvels/LH-BarChart-Proj#readme",
+  "dependencies": {
+    "eslint": "^6.7.0"
+  }
 }
