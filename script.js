@@ -355,3 +355,4 @@ $(document).ready(() =>{
   drawBarChart(data, options, element)
 
 })
+module.exports = drawBarChart;
