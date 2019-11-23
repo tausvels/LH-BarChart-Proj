@@ -1,0 +1,23 @@
+{
+  "name": "lh-barchart-proj",
+  "version": "1.0.0",
+  "description": "script.js file to generate barchart for given data",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tausvels/LH-BarChart-Proj.git"
+  },
+  "keywords": [
+    "barchart",
+    "npm"
+  ],
+  "author": "Tausif Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tausvels/LH-BarChart-Proj/issues"
+  },
+  "homepage": "https://github.com/tausvels/LH-BarChart-Proj#readme"
+}
