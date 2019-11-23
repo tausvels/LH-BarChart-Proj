@@ -1,3 +1,74 @@
+$(document).ready(() =>{
+//The parameters
+
+//  options = [  
+//    MainTitle, 
+//    Color-MainTitle, 
+//    Size-MainTItle, 
+//    YTitle, 
+//    Color-YTitle, 
+//    Size-YTitle,
+//    XTitle, 
+//    Color-XTitle, 
+//    Size-XTitle, 
+//    Color-Ylabel, 
+//    Size-YLabel, 
+//    Color-XLabel, 
+//    Size-XLabel
+//    Y-Axis increment value, 
+//    Color-Bar, 
+//    Color-BottomBar, 
+//    Color-TopBar, 
+//    Color-ValueOfBar,
+//    Size-ValueOfBar, 
+//    Middle-PositionOfValueOfBar, 
+//    SpacingBetweenBars, 
+//    Height of chart,
+//    Width of chart
+//  ]
+
+  options = [
+    "DefaultMainTitle", // Main Title (Default)
+    "#1e90ff",          // Color-MainTitle
+    "30px",             // Size-MainTitle
+    "DefaultYTitle",    // Y-Title (Default)
+    "#663399",          // Y-Title (Color)
+    "25px",             // Y-Title (Font-size)
+    "DefaultXTitle",    // X-Title (Default)
+    "#006400",          // X-Title (Color)
+    "25px",             // X-Title (Font-size)
+    "#ff9a00",          // Y-Label (Color)
+    "20px",             // Y-Label (Size)
+    "#b904b8",          // X-Label (Color)
+    "20px",             // X-Label (Font-Size)
+    "5",               // Y-Axis Divisions or increment value
+    "none",             // Bar (Color)
+    "#00FA9A",          // Bottom Bar (Color)
+    "#FFF000",          // Top Bar (Color)
+    "#FF0000",          // Value of Bar (Color)
+    "12px",             // Value of Bar (Font-Size)
+    "middle",           // Value of Bar (Position)
+    "20px",             // Space Between Bars
+    "200",              // Height of entire Bar Chart (Dafault='auto')
+    "200",              // Width of entire Bar Chart (Dafault='auto')
+    "valDepend"         // Bar width dependent on the value of each bar (leave blank to have equal width)
+  ],
+    //Format: data = [["Item1", Value1, Value2], ["Item2", Value1, Value2], ["Item3", Value1, Value2],]
+    data = [
+      ["Item1", 20, 30],
+      ["Item2", 28, 12],
+      ["Item3", 36],
+      ["Item4", 25],
+      ["Item5", 30, 10]
+    ],
+    //The DOM Element where the entire bargrpah will be rendered
+    element = ".root";
+
+  //RUNNING THE drawBarChartFunction
+  drawBarChart(data, options, element)
+})
+
+//CREATING THE DRAWBARCHART FUNCTION
 function drawBarChart(data, options, element){
 
   //The Functions
@@ -285,74 +356,5 @@ function drawBarChart(data, options, element){
   });
 
 }
-$(document).ready(() =>{
-//The parameters
 
-//  options = [  
-//    MainTitle, 
-//    Color-MainTitle, 
-//    Size-MainTItle, 
-//    YTitle, 
-//    Color-YTitle, 
-//    Size-YTitle,
-//    XTitle, 
-//    Color-XTitle, 
-//    Size-XTitle, 
-//    Color-Ylabel, 
-//    Size-YLabel, 
-//    Color-XLabel, 
-//    Size-XLabel
-//    Y-Axis increment value, 
-//    Color-Bar, 
-//    Color-BottomBar, 
-//    Color-TopBar, 
-//    Color-ValueOfBar,
-//    Size-ValueOfBar, 
-//    Middle-PositionOfValueOfBar, 
-//    SpacingBetweenBars, 
-//    Height of chart,
-//    Width of chart
-//  ]
-
-  options = [
-    "DefaultMainTitle", // Main Title (Default)
-    "#1e90ff",          // Color-MainTitle
-    "30px",             // Size-MainTitle
-    "DefaultYTitle",    // Y-Title (Default)
-    "#663399",          // Y-Title (Color)
-    "25px",             // Y-Title (Font-size)
-    "DefaultXTitle",    // X-Title (Default)
-    "#006400",          // X-Title (Color)
-    "25px",             // X-Title (Font-size)
-    "#ff9a00",          // Y-Label (Color)
-    "20px",             // Y-Label (Size)
-    "#b904b8",          // X-Label (Color)
-    "20px",             // X-Label (Font-Size)
-    "5",               // Y-Axis Divisions or increment value
-    "none",             // Bar (Color)
-    "#00FA9A",          // Bottom Bar (Color)
-    "#FFF000",          // Top Bar (Color)
-    "#FF0000",          // Value of Bar (Color)
-    "12px",             // Value of Bar (Font-Size)
-    "middle",           // Value of Bar (Position)
-    "20px",             // Space Between Bars
-    "200",              // Height of entire Bar Chart (Dafault='auto')
-    "200",              // Width of entire Bar Chart (Dafault='auto')
-    "valDepend"         // Bar width dependent on the value of each bar (leave blank to have equal width)
-  ],
-    //Format: data = [["Item1", Value1, Value2], ["Item2", Value1, Value2], ["Item3", Value1, Value2],]
-    data = [
-      ["Item1", 20, 30],
-      ["Item2", 28, 12],
-      ["Item3", 36],
-      ["Item4", 25],
-      ["Item5", 30]
-    ],
-    //The DOM Element where the entire bargrpah will be rendered
-    element = ".root";
-
-  //RUNNING THE drawBarChartFunction
-  drawBarChart(data, options, element)
-
-})
 module.exports = drawBarChart;
