@@ -36,7 +36,7 @@ data = [[item1, quantity1, quantity2], [item2, quantity1, quantity2, quantity3],
 1. Fix all the aforementioned bugs and issues and introduce more options both within the script.js as well as ON CLICK.
 2. Include a form within an HTML file for data to be input directly by user without going to script.js file.
 
-# External resources used that helpmed build this library
+# External resources used that helped build this library
 1. www.youtube.com
 2. www.w3schools.com/jquery/default.asp
 3. www.stackoverflow.com
