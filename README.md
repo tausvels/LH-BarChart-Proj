@@ -19,11 +19,11 @@ This bar char library supports the following functions:
 change 'Default MainTitle, default X-Title, default Y-Title, change color of X-Labels, change color of Y-Labels'.
 # 2. 'FROM OPTIONS' - 
 Y-Axis increment size, height and width of chart area, position of dataPoints inside the bar(top, middle or bottom [default is 'middle']), font-size of MainTitle, X-Title,X-Label, Y-Title, Y-Label and dataPoints, color of both BOTTOM and TOP BARS.
-# 3 'WIDTH OF BARS' from OPTIONS
+# 3 'WIDTH OF BARS' from OPTIONS-
 The width of the bar can be made 'VALUE DEPENDENT' or have 'EQUAL WIDTH'. 'ValDepend' is set as default, but for equal width, this value can be left blank or changed to some other value.
-# 4. Singe data value in the format: 
+# 4. Single data value in the format-: 
 data = [[item1, quantity1], [item2, quantity1], [item3, quantity3],...]
-# 5. Multiple data value in the format: 
+# 5. Multiple data value in the format-: 
 data = [[item1, quantity1, quantity2], [item2, quantity1, quantity2, quantity3], [item3, quantity1, quantity2],...]
 
 # Known BUGS and ISSUES
