@@ -10,6 +10,9 @@ This is Lighthouse Labs stretch-project where the objective is to create a bar c
 # Some Context
 This bar chart library generates a bar graph representation of the data being provided in the script.js file. There are three parameters for this library to work, which are, 'DATA', 'OPTIONS' and 'ELEMENT'. The 'ELEMENT' is the part of the DOM where the user would want their bar chart to be rendered. Within the 'OPTIONS' parameter, the user would be able to set the visual representation of the chart. The 'DATA' is needs to be in the format of [[item1, quantity1, quantity2], [item2, quantity1, quantity2], [item1, quantity1], ...]
 
+# Screenshots
+![screenshot](screenshot/1.%20SingleBar.JPG) ![screenshot](screenshot/2.%20StackedBar.JPG) ![screenshot](screenshot/3.%20MultiStackedBar.JPG) ![screenshot](screenshot/4.%EqualWidthBar.JPG) ![screenshot](screenshot/5.%20PromptToChangeMainTitle.JPG) ![screenshot](screenshot/6.%20DifferentColoredLables.JPG)
+
 # API Function for the USER
 The user is expected to run the function -- drawBarChart(data, options, element), where the contents of each parameter need to be inserted into the script.js file in the section $(document).ready(() =>{data= [], options = [], element = [] })
 
